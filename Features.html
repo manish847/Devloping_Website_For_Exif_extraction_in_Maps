@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %} 
+<div class="row bg-light py-3" id="i2">
+  <div class="col-md-12" id="i3 ">
+    <h3 id="toolHeading" class="text-white">Exif Viewer</h3>
+    <form action='/features' methods='POST'>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Upload File</label>
+        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="file">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+  </div>
+{% endblock content %} 

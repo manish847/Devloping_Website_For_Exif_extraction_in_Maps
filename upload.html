@@ -1,0 +1,148 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Location Finder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> 
+  <style>  
+    body{ 
+
+      height:100vh;
+    }
+  </style>
+  </head>  
+  
+<body class="d-flex flex-column"> 
+  <div class="container-fluid">
+    <nav class="container-fluild navbar navbar-expand-lg navbar-light bg-dark fixed-top ">
+      <a class="navbar-brand text-white" href="{{ url_for('index') }}">Location Finder</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <nav class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ url_for('about') }}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ url_for('contacts') }}">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ url_for('features') }}">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ url_for('feedback') }}">Feedback</a>
+          </li>
+        </nav>
+      </div>
+    </nav>  
+  </div>
+  <div class="container-fluid  mb-5 flex-grow-1" style="margin-top:80px;">
+    <!-- Main content here -->
+{% block content %}
+<form method="POST" action="/features" enctype="multipart/form-data">
+    <input type="file" name="image">
+    <input type="submit" value="Upload">
+</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flash-messages" style="list-style-type: none;">
+    {% for message in messages %}
+    <h3 class="text-danger" style="padding:10px">{{ message }}</h3>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+{% if info_dict or exif_info %}
+<h2>EXIF Basic Info</h2>
+<table border="1px solid" width="100%"><tr><th border="1px solid">Exif Key</th><th border="1px solid">Exif Value</th></tr>
+<ul>
+    {% for key, value in info_dict.items() %}
+    <tr><td border="1px solid"><li><strong>{{ key }}</strong></li></td><td border="1px solid">{{ value }}</td></tr>
+    {% endfor %}
+</ul></table>
+<h2>EXIF Technical Info</h2>
+{% if exif_info | length %}
+<table border="1px solid" width="100%"><tr><th border="1px solid">Exif Key</th><th border="1px solid">Exif Value</th></tr>
+<ul>
+    {% for key, value in exif_info.items() %}
+    <tr><td border="1px solid"><li><strong>{{ key }}</strong></li></td><td border="1px solid"> {{ value }}</td></tr>
+    {% endfor %}
+    {% if 'GPSInfo' in exif_info  %}
+      <td border="1px solid"><li><h3> Map</h3></li></td><td border="1px solid"><a  href="Map.html" target="_blank">Click here to Navigate to Map</a>
+    </td></tr> 
+
+    {% else %}
+    <td border="1px solid"><li><h6> Map</h6></li></td><td border="1px solid"><h6>There is no location in this photo </h6>
+    </td></tr>
+    {% endif %}
+  </ul></table>
+{% else %}
+<h3> There is no Technical data in this photo </h3>
+{% endif %}
+{% endif %}
+{% endblock content %} 
+  </div>
+  <footer class="bg-dark text-light py-3 mb-auto">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 text-center">
+          <h4>About Us</h4>
+          <p class="text-wrap">We are final-year students of B.Tech CSE, and Location Finder is our final-year project, which was made under the guidance of our mentor, Mr. Atanu Kumar Das, Sir. Our college's name is Regent Education and Research Foundation, situated in the city of Barrackpore, Kolkata - 700121.</p>
+          <div class="social">
+            <a href="https://www.facebook.com/don.man.33234"><span class="fab fa-facebook-f"></span></a>
+            <a href="https://twitter.com/ManishP56059745?t=Ar-xWPSvoaK6T09BwY4U1A&s=08"><span class="fab fa-twitter"></span></a>
+            <a href="https://instagram.com/manish1568?igshid=ZDdkNTZiNTM="><span class="fab fa-instagram"></span></a>
+            <a href="https://youtube.com/@manishpathak2329"><span class="fab fa-youtube"></span></a>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 text-center">
+          <h4>Contact Us</h4>
+          <div class="content">
+            <form action="https://formsubmit.co/el/cagonu" methods="POST">
+              <button type="submit" class="btn btn-primary">EMAIL</button>
+            </form>
+          </div>
+        </div> 
+        <div class="col-md-4 col-sm-12 text-center"> 
+          <h4>Address</h4>
+          <div class="content">
+            <div class="place">
+              <span class="fas fa-map-marker-alt"></span>
+              <span class="text">RERF,Barrakpore</span>
+            </div>
+            <div class="phone">
+              <span class="fas fa-phone-alt"></span>
+              <span class="text">+91-9903125814</span>
+            </div>
+            <div class="email">
+              <span class="fas fa-envelope"></span>
+              <span class="text">pathakmanish8479@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <span class="credit">Created By <a href="https://instagram.com/manish1568?igshid=ZDdkNTZiNTM=">MAS</a> | </span>
+          <span class="far fa-copyright"></span>
+          <span> 2023 All rights reserved.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

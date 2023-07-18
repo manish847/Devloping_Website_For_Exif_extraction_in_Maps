@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<div class="row container">
+  <div class="col-md-12">
+    <h3 id="how-to-see-where-a-photo-was-taken">How to see where a photo was taken?</h3>
+    <p>The <strong>EXIF viewer</strong> will automatically show you the
+      location of your photo on Google Maps using the GPS data embedded in the photo (if available).
+      The photo location viewer is a handy feature if you can't remember where your photo was taken.
+      The location viewer will only work if the photo has location data embedded. Not all cameras support
+      GPS
+      location data, and often, people will remove the location data before
+      posting images
+    </p>
+    <p>Some camera makers (Nikon, FuijiFilm, etc) also record the camera's <strong>shutter count</strong> in
+      the EXIF data.</p>
+    <p>Date and time, fnumbers (aperture), ISO speed, White Balance
+      (WB), metering, orientation, resolution, exposure compensation, which lens you used and much more...
+    </p>
+    <p>EXIF (Exchangeable Image File) is a format for storing information about images in the image file
+      itself.
+      It is used by digital cameras, smart phones, tablets, and other devices.</p>
+    <p>Open a photo from your desktop computer or mobile device </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3 id="what-is-exif-data">What is EXIF data?</h3>
+    <p>Nearly all digital cameras use the EXIF standard, and store a broad range of metadata.
+      You'll be able to look at some of this metadata with this <strong>EXIF data viewer</strong>, for
+      example:
+    </p>
+    <ul>
+      <li>Date and time information. Digital cameras will record the current date and time and save this in
+        the
+        metadata</li>
+      <li>Camera settings. This includes static information such as the camera model and make, and
+        information
+        that varies with each image such as orientation (rotation), f-number, shutter speed, metering
+        system,
+        orientation, focal length, white balance, and ISO speed information</li>
+      <li>GPS information to identify where the picture was taken</li>
+      
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+{% endblock content %}
